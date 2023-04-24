@@ -42,6 +42,7 @@ func NewIPv4UDPConn(iface string, addr *net.UDPAddr) (*net.UDPConn, error) {
 		return nil, fmt.Errorf("cannot bind to port %d: %v", addr.Port, err)
 	}
 
+	//FilePacketConn is not implemented on windows
 	conn, err := net.FilePacketConn(f)
 	if err != nil {
 		return nil, err
