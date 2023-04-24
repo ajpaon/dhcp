@@ -29,12 +29,6 @@ func NewIPv4UDPConn(iface string, addr *net.UDPAddr) (*net.UDPConn, error) {
 		return nil, fmt.Errorf("cannot set reuseaddr on socket: %v", err)
 	}
 
-	if len(iface) != 0 {
-		if err := dhcpv4.BindToInterface(fd, iface); err != nil {
-			return nil, fmt.Errorf("cannot bind to interface: %s: %v", iface, err)
-		}
-	}
-
 	if addr == nil {
 		addr = &net.UDPAddr{Port: dhcpv4.ServerPort}
 	}
